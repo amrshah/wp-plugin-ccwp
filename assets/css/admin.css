@@ -3,11 +3,11 @@
  */
 
 /* Meta Box Styling */
-#dcp-react-root {
+#ccp-react-root {
     margin: 20px 0;
 }
 
-.dcp-meta-box {
+.ccp-meta-box {
     background: #fff;
     padding: 20px;
     border: 1px solid #ccd0d4;
@@ -16,11 +16,11 @@
 }
 
 /* Builder Layout */
-.dcp-builder {
+.ccp-builder {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
 }
 
-.dcp-header h2 {
+.ccp-header h2 {
     margin: 0;
     font-size: 24px;
     font-weight: 600;
@@ -28,15 +28,15 @@
 }
 
 /* Variant Cards */
-.dcp-variant-card {
+.ccp-variant-card {
     transition: all 0.2s ease;
 }
 
-.dcp-variant-card:hover {
+.ccp-variant-card:hover {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.dcp-variant-header h3 {
+.ccp-variant-header h3 {
     margin: 0;
     font-size: 18px;
     font-weight: 600;
@@ -44,7 +44,7 @@
 }
 
 /* Condition Rows */
-.dcp-conditions-section h4 {
+.ccp-conditions-section h4 {
     margin: 0 0 15px 0;
     font-size: 14px;
     font-weight: 600;
@@ -53,7 +53,7 @@
     letter-spacing: 0.5px;
 }
 
-.dcp-condition-row {
+.ccp-condition-row {
     background: white;
     padding: 12px;
     border-radius: 6px;
@@ -61,43 +61,43 @@
 }
 
 /* Form Controls */
-.dcp-select:focus,
-.dcp-input:focus,
-.dcp-textarea:focus {
+.ccp-select:focus,
+.ccp-input:focus,
+.ccp-textarea:focus {
     outline: none;
     border-color: #2563eb;
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 /* Buttons */
-.dcp-btn-add,
-.dcp-btn-add-variant,
-.dcp-btn-save {
+.ccp-btn-add,
+.ccp-btn-add-variant,
+.ccp-btn-save {
     transition: all 0.2s ease;
     font-size: 14px;
 }
 
-.dcp-btn-add:active,
-.dcp-btn-add-variant:active,
-.dcp-btn-save:active {
+.ccp-btn-add:active,
+.ccp-btn-add-variant:active,
+.ccp-btn-save:active {
     transform: translateY(1px);
 }
 
-.dcp-btn-remove {
+.ccp-btn-remove {
     font-size: 13px;
     transition: all 0.2s ease;
 }
 
-.dcp-btn-remove:active {
+.ccp-btn-remove:active {
     transform: translateY(1px);
 }
 
 /* Content Section */
-.dcp-content-section {
+.ccp-content-section {
     margin-top: 20px;
 }
 
-.dcp-content-section h4 {
+.ccp-content-section h4 {
     margin: 0 0 10px 0;
     font-size: 14px;
     font-weight: 600;
@@ -105,11 +105,11 @@
 }
 
 /* Default Content */
-.dcp-default-content {
+.ccp-default-content {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.dcp-default-content h3 {
+.ccp-default-content h3 {
     margin: 0 0 10px 0;
     font-size: 18px;
     font-weight: 600;
@@ -117,7 +117,7 @@
 }
 
 /* Loading State */
-.dcp-loading {
+.ccp-loading {
     display: inline-block;
     width: 20px;
     height: 20px;
@@ -133,20 +133,20 @@
 }
 
 /* Success/Error Messages */
-.dcp-message {
+.ccp-message {
     padding: 12px 16px;
     border-radius: 6px;
     margin: 15px 0;
     font-size: 14px;
 }
 
-.dcp-message.success {
+.ccp-message.success {
     background: #d1fae5;
     color: #065f46;
     border: 1px solid #6ee7b7;
 }
 
-.dcp-message.error {
+.ccp-message.error {
     background: #fee2e2;
     color: #991b1b;
     border: 1px solid #fca5a5;
@@ -154,24 +154,24 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-    .dcp-condition-row {
+    .ccp-condition-row {
         flex-direction: column;
         align-items: stretch !important;
     }
     
-    .dcp-select,
-    .dcp-input {
+    .ccp-select,
+    .ccp-input {
         width: 100% !important;
         min-width: 100% !important;
     }
     
-    .dcp-header {
+    .ccp-header {
         flex-direction: column;
         align-items: flex-start !important;
         gap: 15px;
     }
     
-    .dcp-variant-header {
+    .ccp-variant-header {
         flex-direction: column;
         align-items: flex-start !important;
         gap: 10px;
@@ -189,13 +189,13 @@
 }
 
 /* Tooltips */
-.dcp-tooltip {
+.ccp-tooltip {
     position: relative;
     display: inline-block;
     cursor: help;
 }
 
-.dcp-tooltip::after {
+.ccp-tooltip::after {
     content: attr(data-tooltip);
     position: absolute;
     bottom: 125%;
@@ -213,31 +213,31 @@
     z-index: 1000;
 }
 
-.dcp-tooltip:hover::after {
+.ccp-tooltip:hover::after {
     opacity: 1;
 }
 
 /* Empty State */
-.dcp-empty-state {
+.ccp-empty-state {
     text-align: center;
     padding: 60px 20px;
     color: #64748b;
 }
 
-.dcp-empty-state svg {
+.ccp-empty-state svg {
     width: 80px;
     height: 80px;
     margin-bottom: 20px;
     opacity: 0.5;
 }
 
-.dcp-empty-state h3 {
+.ccp-empty-state h3 {
     font-size: 18px;
     margin-bottom: 10px;
     color: #334155;
 }
 
-.dcp-empty-state p {
+.ccp-empty-state p {
     font-size: 14px;
     margin-bottom: 20px;
 }

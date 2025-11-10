@@ -5,7 +5,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-class CCP_Admin {
+class CCP_Adminv1 {
     
     private static $instance = null;
     
@@ -50,20 +50,7 @@ class CCP_Admin {
      * Render the main React interface meta box
      */
     public function render_meta_box($post) {
-        wp_nonce_field('ccp_save_meta', 'ccp_meta_nonce');
-        ?>
-        <div id="ccp-react-root" style="min-height: 400px;">
-            <div style="text-align: center; padding: 60px 20px;">
-                <div class="ccp-spinner" style="margin: 0 auto 20px; width: 40px; height: 40px; border: 4px solid #f3f4f6; border-top-color: #2563eb; border-radius: 50%; animation: spin 1s linear infinite;"></div>
-                <p style="color: #6b7280;">Loading Dynamic Content Builder...</p>
-            </div>
-        </div>
-        <style>
-            @keyframes spin {
-                to { transform: rotate(360deg); }
-            }
-        </style>
-        <?php
+        echo '<div id="dcp-react-root"></div>';
     }
     
     /**
@@ -71,7 +58,7 @@ class CCP_Admin {
      */
     public function render_shortcode_box($post) {
         ?>
-        <div class="ccp-shortcode-box">
+        <div class="dcp-shortcode-box">
             <p><strong><?php _e('Use this shortcode:', 'dynamic-content-pro'); ?></strong></p>
             <input type="text" 
                    value='[ccp_content id="<?php echo $post->ID; ?>"]' 
@@ -99,7 +86,7 @@ class CCP_Admin {
             __('Settings', 'dynamic-content-pro'),
             __('Settings', 'dynamic-content-pro'),
             'manage_options',
-            'ccp-settings',
+            'dcp-settings',
             [$this, 'render_settings_page']
         );
     }
@@ -172,11 +159,11 @@ class CCP_Admin {
             
             <h2><?php _e('Clear Cache', 'dynamic-content-pro'); ?></h2>
             <p><?php _e('Clear all cached dynamic content.', 'dynamic-content-pro'); ?></p>
-            <button type="button" class="button" id="ccp-clear-cache"><?php _e('Clear Cache Now', 'dynamic-content-pro'); ?></button>
+            <button type="button" class="button" id="dcp-clear-cache"><?php _e('Clear Cache Now', 'dynamic-content-pro'); ?></button>
             
             <script>
             jQuery(document).ready(function($) {
-                $('#ccp-clear-cache').on('click', function() {
+                $('#dcp-clear-cache').on('click', function() {
                     if (confirm('<?php _e('Are you sure you want to clear all cache?', 'dynamic-content-pro'); ?>')) {
                         $.post(ajaxurl, {
                             action: 'ccp_clear_cache',

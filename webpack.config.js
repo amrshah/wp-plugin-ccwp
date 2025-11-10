@@ -5,6 +5,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'index.js',
+    library: 'CCPAdmin',
+    libraryTarget: 'window'
   },
   module: {
     rules: [
@@ -14,7 +16,10 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-react']
+            presets: [
+              '@babel/preset-react',
+              ['@babel/preset-env', { targets: 'defaults' }]
+            ]
           }
         }
       }
@@ -25,7 +30,8 @@ module.exports = {
   },
   externals: {
     'react': 'React',
-    'react-dom': 'ReactDOM',
-    '@wordpress/element': 'wp.element'
-  }
+    'react-dom': 'ReactDOM'
+  },
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
+  devtool: process.env.NODE_ENV === 'production' ? false : 'source-map'
 };
