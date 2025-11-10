@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from '@wordpress/element';
 
-const ConditionalContentBuilder = () => {
+const DynamicContentBuilder = () => {
     const [conditions, setConditions] = useState([]);
     const [contentVariants, setContentVariants] = useState([{ id: 1, content: '', conditions: [] }]);
     const [defaultContent, setDefaultContent] = useState('');
@@ -85,7 +85,8 @@ const ConditionalContentBuilder = () => {
 
     const saveContent = async () => {
         const data = {
-            variants: contentVariants,
+                variants: JSON.stringify(contentVariants), // ✅ key change
+
             defaultContent,
             conditionOperator,
             action: 'ccp_save_content',
@@ -144,12 +145,8 @@ const ConditionalContentBuilder = () => {
                 {renderValueInput(condition, variantId)}
 
                 <button
-                    onClick={(e) => {
-                        e.preventDefault();
-                        removeCondition(variantId, condition.id);
-                    }}
+                    onClick={() => removeCondition(variantId, condition.id)}
                     className="ccp-btn-remove"
-                    type="button"
                 >
                     Remove
                 </button>
@@ -266,12 +263,8 @@ const ConditionalContentBuilder = () => {
                             <h3>Content Variant #{index + 1}</h3>
                             {contentVariants.length > 1 && (
                                 <button
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        removeVariant(variant.id);
-                                    }}
+                                    onClick={() => removeVariant(variant.id)}
                                     className="ccp-btn-remove"
-                                    type="button"
                                 >
                                     Remove Variant
                                 </button>
@@ -284,12 +277,8 @@ const ConditionalContentBuilder = () => {
                                 renderConditionFields(condition, variant.id)
                             )}
                             <button
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    addCondition(variant.id);
-                                }}
+                                onClick={() => addCondition(variant.id)}
                                 className="ccp-btn-add"
-                                type="button"
                             >
                                 + Add Condition
                             </button>
@@ -309,14 +298,7 @@ const ConditionalContentBuilder = () => {
                 ))}
             </div>
 
-            <button 
-                onClick={(e) => {
-                    e.preventDefault();
-                    addVariant();
-                }} 
-                className="ccp-btn-add-variant"
-                type="button"
-            >
+            <button onClick={addVariant} className="ccp-btn-add-variant">
                 + Add New Variant
             </button>
 
@@ -333,14 +315,7 @@ const ConditionalContentBuilder = () => {
             </div>
 
             <div className="ccp-actions">
-                <button 
-                    onClick={(e) => {
-                        e.preventDefault();
-                        saveContent();
-                    }} 
-                    className="ccp-btn-save"
-                    type="button"
-                >
+                <button onClick={saveContent} className="ccp-btn-save">
                     Save Dynamic Content
                 </button>
             </div>
@@ -491,14 +466,12 @@ const ConditionalContentBuilder = () => {
 };
 
 // Initialize when DOM is ready
-if (typeof window !== 'undefined') {
-    window.addEventListener('DOMContentLoaded', () => {
-        const container = document.getElementById('ccp-react-root');
-        if (container && typeof ReactDOM !== 'undefined') {
-            // Use legacy render for compatibility
-            ReactDOM.render(<ConditionalContentBuilder />, container);
-        }
-    });
-}
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('ccp-react-root');
+    if (container) {
+        const root = createRoot(container);
+        root.render(<DynamicContentBuilder />);
+    }
+});
 
-export default ConditionalContentBuilder;
+export default DynamicContentBuilder;
