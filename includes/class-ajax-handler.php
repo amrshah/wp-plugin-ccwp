@@ -39,7 +39,7 @@ class CCP_Ajax_Handler {
         
         $post_id = intval($_POST['post_id'] ?? 0);
         $variants = json_decode(stripslashes($_POST['variants'] ?? '[]'), true);
-        $default_content = sanitize_textarea_field($_POST['defaultContent'] ?? '');
+        $default_content = wp_kses_post($_POST['defaultContent'] ?? '');
         $operator = sanitize_text_field($_POST['conditionOperator'] ?? 'AND');
         
         if (!$post_id) {
@@ -48,12 +48,14 @@ class CCP_Ajax_Handler {
         
         // Sanitize variants
         $sanitized_variants = [];
-        foreach ($variants as $variant) {
-            $sanitized_variants[] = [
-                'id' => intval($variant['id']),
-                'content' => wp_kses_post($variant['content']),
-                'conditions' => $this->sanitize_conditions($variant['conditions'] ?? [])
-            ];
+        if (is_array($variants)) {
+            foreach ($variants as $variant) {
+                $sanitized_variants[] = [
+                    'id' => intval($variant['id'] ?? time()),
+                    'content' => wp_kses_post($variant['content'] ?? ''),
+                    'conditions' => $this->sanitize_conditions($variant['conditions'] ?? [])
+                ];
+            }
         }
         
         // Save to post meta
@@ -66,7 +68,8 @@ class CCP_Ajax_Handler {
         
         wp_send_json_success([
             'message' => 'Content saved successfully',
-            'post_id' => $post_id
+            'post_id' => $post_id,
+            'variants_count' => count($sanitized_variants)
         ]);
     }
     
@@ -104,7 +107,7 @@ class CCP_Ajax_Handler {
         
         $sanitized_conditions = $this->sanitize_conditions($conditions);
         
-        $condition_engine = ccp_Condition_Engine::instance();
+        $condition_engine = CCP_Condition_Engine::instance();
         $result = $condition_engine->evaluate($sanitized_conditions, $operator);
         
         wp_send_json_success([
